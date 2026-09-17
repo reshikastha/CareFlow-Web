@@ -7,6 +7,8 @@ import {
 
 import Login from "./pages/login";
 import Register from "./pages/register";
+import Dashboard from "./pages/Dashboard";
+import Roster from "./pages/Roster";
 
 // import "./styles/auth.css";
 
@@ -17,6 +19,8 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/roster" element={<Roster />} />
       </Routes>
     </BrowserRouter>
   );

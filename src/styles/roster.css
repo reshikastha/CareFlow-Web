@@ -1,0 +1,290 @@
+
+.roster-page-header {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.roster-controls {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.outline-button,
+.date-button,
+.date-arrows button {
+  display: inline-flex;
+  min-height: 40px;
+  padding: 0 14px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #fff;
+  border: 1px solid #dce4df;
+  border-radius: 8px;
+}
+
+.date-arrows {
+  display: flex;
+}
+
+.date-arrows button {
+  width: 34px;
+  padding: 0;
+  border-radius: 0;
+}
+
+.date-arrows button:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.date-arrows button:last-child {
+  border-left: 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.calendar-card {
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.calendar-grid {
+  display: grid;
+  min-width: 1000px;
+  grid-template-columns: 62px repeat(7, 1fr);
+}
+
+.time-column,
+.calendar-day {
+  border-right: 1px solid #e1e8e4;
+}
+
+.calendar-corner,
+.calendar-day header {
+  display: grid;
+  height: 62px;
+  place-items: center;
+  border-bottom: 1px solid #dfe7e2;
+}
+
+.calendar-day header {
+  align-content: center;
+  font-size: 13px;
+}
+
+.calendar-day header span {
+  margin-top: 3px;
+  font-size: 11px;
+}
+
+.calendar-day header.today {
+  color: #075d3c;
+  background: #e7f7eb;
+}
+
+.time-labels {
+  display: flex;
+  height: 345px;
+  padding: 8px 6px 11px;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #56667a;
+  font-size: 11px;
+}
+
+.day-body {
+  position: relative;
+  height: 345px;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 48px,
+    #e8eeea 49px
+  );
+}
+
+.calendar-shift {
+  position: absolute;
+  right: 7px;
+  left: 7px;
+  display: grid;
+  min-height: 88px;
+  padding: 9px;
+  align-content: start;
+  font-size: 11px;
+  border-left: 3px solid;
+  border-radius: 6px;
+}
+
+.calendar-shift strong {
+  margin-bottom: 5px;
+  font-size: 11px;
+}
+
+.calendar-shift span {
+  margin-bottom: 3px;
+}
+
+.calendar-shift--green {
+  background: #e7f7eb;
+  border-color: #1c9c53;
+}
+
+.calendar-shift--blue {
+  background: #e8f3ff;
+  border-color: #2683df;
+}
+
+.calendar-shift--orange {
+  background: #fff3df;
+  border-color: #e89b24;
+}
+
+.calendar-shift--red {
+  background: #ffeded;
+  border-color: #ef4444;
+}
+
+.calendar-shift--purple {
+  background: #f0eaff;
+  border-color: #8554df;
+}
+
+.unassigned-card .assign-button {
+  min-height: 31px;
+  padding: 0 18px;
+  font-size: 12px;
+}
+
+.skill-list {
+  display: flex;
+  gap: 6px;
+}
+
+.skill-list span {
+  padding: 4px 8px;
+  color: #345149;
+  font-size: 11px;
+  background: #edf3f0;
+  border-radius: 12px;
+}
+
+/* Responsive */
+
+.sidebar-overlay {
+  display: none;
+}
+
+@media (max-width: 1150px) {
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .roster-page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .roster-controls {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+}
+
+@media (max-width: 800px) {
+  .sidebar-wrapper {
+    left: -250px;
+    transition: left 0.25s ease;
+  }
+
+  .sidebar-wrapper.show {
+    left: 0;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    z-index: 25;
+    display: block;
+    inset: 0;
+    background: rgba(15, 30, 23, 0.4);
+    border: 0;
+  }
+
+  .main-container {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .mobile-menu-button {
+    display: grid;
+  }
+
+  .top-header {
+    padding: 0 18px;
+    gap: 12px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .profile-information,
+  .profile-menu-button {
+    display: none;
+  }
+
+  .page-content {
+    padding: 22px 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .page-heading {
+    gap: 10px;
+    flex-direction: column;
+  }
+
+  .page-heading h1,
+  .roster-page-header h1 {
+    font-size: 28px;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    min-height: 115px;
+  }
+
+  .card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .card-header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .header-actions {
+    gap: 5px;
+  }
+
+  .profile-avatar {
+    width: 35px;
+    height: 35px;
+  }
+
+  .date-button {
+    min-width: 240px;
+  }
+}
