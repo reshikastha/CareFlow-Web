@@ -1,0 +1,663 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  font-family: "DM Sans", Arial, sans-serif;
+  color: #102139;
+  background-color: #f8faf9;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: #07613e;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Main page */
+
+.auth-page {
+  display: grid;
+  min-height: 100vh;
+  padding: 32px;
+  place-items: center;
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(98, 190, 126, 0.1),
+      transparent 26%
+    ),
+    #fbfcfb;
+}
+
+/* Main card */
+
+.auth-card {
+  display: grid;
+  grid-template-columns: 46% 54%;
+  width: min(1120px, 100%);
+  min-height: 680px;
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid #e5ebe7;
+  border-radius: 24px;
+  box-shadow: 0 28px 75px rgba(16, 50, 34, 0.12);
+}
+
+/* Left panel */
+
+.auth-side-panel {
+  position: relative;
+  padding: 48px 56px;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      145deg,
+      #fafffb 0%,
+      #edf9f0 60%,
+      #dff2e4 100%
+    );
+}
+
+/* CareFlow logo */
+
+.brand-logo {
+  position: relative;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-name {
+  color: #07583a;
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.brand-icon {
+  position: relative;
+  display: inline-block;
+  width: 31px;
+  height: 31px;
+}
+
+.brand-leaf {
+  position: absolute;
+  top: 2px;
+  width: 18px;
+  height: 25px;
+  background:
+    linear-gradient(
+      150deg,
+      #34a860,
+      #7acb72
+    );
+}
+
+.brand-leaf-left {
+  left: 1px;
+  border-radius: 15px 15px 2px 15px;
+  transform: rotate(-25deg);
+}
+
+.brand-leaf-right {
+  right: 1px;
+  border-radius: 15px 15px 15px 2px;
+  transform: rotate(25deg);
+}
+
+.brand-icon::after {
+  position: absolute;
+  bottom: 0;
+  left: 14px;
+  width: 2px;
+  height: 18px;
+  content: "";
+  background-color: #ffffff;
+}
+
+/* Side heading */
+
+.side-message {
+  position: relative;
+  z-index: 4;
+  max-width: 365px;
+  margin-top: 82px;
+}
+
+.side-message h2 {
+  margin: 0;
+  color: #07583a;
+  font-size: clamp(36px, 3.2vw, 50px);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+.side-message p {
+  margin: 14px 0 0;
+  color: #718096;
+  font-size: 20px;
+}
+
+/* Decorative plant */
+
+.plant-decoration {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 315px;
+}
+
+.background-wave {
+  position: absolute;
+  bottom: -100px;
+  left: -16%;
+  width: 125%;
+  height: 280px;
+  border-radius: 50% 50% 0 0;
+  transform: rotate(12deg);
+}
+
+.wave-one {
+  background-color: rgba(149, 211, 163, 0.25);
+}
+
+.wave-two {
+  bottom: -145px;
+  left: -28%;
+  background-color: rgba(80, 174, 111, 0.14);
+  transform: rotate(23deg);
+}
+
+/* Large heart-shaped plant */
+
+.plant-heart {
+  position: absolute;
+  top: 55px;
+  left: 44%;
+  width: 110px;
+  height: 110px;
+}
+
+.heart-left,
+.heart-right {
+  position: absolute;
+  top: 0;
+  width: 60px;
+  height: 95px;
+  background:
+    linear-gradient(
+      150deg,
+      #0c7d4a,
+      #70bf62
+    );
+}
+
+.heart-left {
+  left: 8px;
+  border-radius: 60px 60px 6px 60px;
+  transform: rotate(-38deg);
+}
+
+.heart-right {
+  right: 8px;
+  border-radius: 60px 60px 60px 6px;
+  transform: rotate(38deg);
+}
+
+.heart-line {
+  position: absolute;
+  bottom: 0;
+  left: 54px;
+  z-index: 2;
+  width: 3px;
+  height: 72px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 3px;
+}
+
+/* Plant stems */
+
+.plant-stem {
+  position: absolute;
+  bottom: -30px;
+  width: 4px;
+  height: 195px;
+  background-color: #197d4d;
+  border-radius: 50%;
+  transform-origin: bottom;
+}
+
+.stem-left {
+  left: 29%;
+  transform: rotate(-12deg);
+}
+
+.stem-right {
+  right: 26%;
+  transform: rotate(16deg);
+}
+
+/* Plant leaves */
+
+.plant-leaf {
+  position: absolute;
+  width: 76px;
+  height: 126px;
+  background:
+    linear-gradient(
+      145deg,
+      #0d6c42,
+      #4da96d
+    );
+  border-radius: 100% 0 100% 0;
+  box-shadow:
+    inset 14px 4px 24px rgba(255, 255, 255, 0.16);
+}
+
+.plant-leaf::after {
+  position: absolute;
+  top: 10px;
+  right: 37px;
+  bottom: 12px;
+  width: 2px;
+  content: "";
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: rotate(-28deg);
+}
+
+.leaf-one {
+  bottom: 0;
+  left: 14%;
+  transform: rotate(-28deg);
+}
+
+.leaf-two {
+  right: 11%;
+  bottom: 30px;
+  width: 56px;
+  height: 100px;
+  transform: rotate(20deg) scaleX(-1);
+}
+
+.leaf-three {
+  top: 12px;
+  left: 8%;
+  width: 30px;
+  height: 68px;
+  opacity: 0.7;
+  transform: rotate(-36deg);
+}
+
+.leaf-four {
+  top: 22px;
+  right: 8%;
+  width: 28px;
+  height: 64px;
+  opacity: 0.35;
+  transform: rotate(35deg) scaleX(-1);
+}
+
+/* Right form panel */
+
+.auth-form-panel {
+  display: grid;
+  padding: 56px 72px;
+  place-items: center;
+}
+
+.auth-form {
+  width: min(440px, 100%);
+}
+
+.form-header {
+  margin-bottom: 35px;
+}
+
+.form-header h1 {
+  margin: 0;
+  color: #0d1c32;
+  font-size: clamp(35px, 4vw, 47px);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+.form-header p {
+  margin: 9px 0 0;
+  color: #77849a;
+  font-size: 17px;
+}
+
+/* Input fields */
+
+.form-field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.field-label {
+  color: #122139;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.input-container {
+  display: flex;
+  min-height: 54px;
+  padding: 0 16px;
+  align-items: center;
+  gap: 13px;
+  color: #5c697c;
+  background-color: #ffffff;
+  border: 1px solid #d5dde5;
+  border-radius: 9px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.input-container:focus-within {
+  border-color: #178255;
+  box-shadow: 0 0 0 3px rgba(23, 130, 85, 0.12);
+}
+
+.input-container input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  color: #14233a;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.input-container input::placeholder {
+  color: #a3adbb;
+}
+
+.password-button {
+  display: grid;
+  padding: 4px;
+  color: #5c697c;
+  background-color: transparent;
+  border: none;
+  place-items: center;
+}
+
+/* Login options */
+
+.form-options {
+  display: flex;
+  margin: -2px 0 28px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #4f5c70;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.checkbox-container input {
+  width: 19px;
+  height: 19px;
+  margin: 0;
+  accent-color: #08613e;
+  cursor: pointer;
+}
+
+.text-button {
+  padding: 0;
+  color: #08613e;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: transparent;
+  border: none;
+}
+
+.text-button:hover {
+  text-decoration: underline;
+}
+
+/* Main button */
+
+.primary-button {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 24px;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+  background:
+    linear-gradient(
+      100deg,
+      #087046,
+      #075e3e
+    );
+  border: none;
+  border-radius: 9px;
+  box-shadow: 0 8px 20px rgba(8, 112, 70, 0.18);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+
+.primary-button:hover {
+  box-shadow: 0 11px 24px rgba(8, 112, 70, 0.25);
+  transform: translateY(-1px);
+}
+
+.primary-button:active {
+  transform: translateY(0);
+}
+
+/* Messages */
+
+.form-message {
+  margin: 14px 0 0;
+  color: #087046;
+  font-size: 14px;
+  text-align: center;
+}
+
+.error-message {
+  color: #bd2929;
+}
+
+/* Bottom divider */
+
+.form-divider {
+  display: flex;
+  margin-top: 31px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #69758a;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.form-divider::before,
+.form-divider::after {
+  flex: 1;
+  height: 1px;
+  content: "";
+  background-color: #d9e0e5;
+}
+
+.form-divider::before {
+  margin-right: 10px;
+}
+
+.form-divider::after {
+  margin-left: 10px;
+}
+
+/* Register page adjustments */
+
+.register-card .auth-form-panel {
+  padding-top: 36px;
+  padding-bottom: 36px;
+}
+
+.register-card .form-header {
+  margin-bottom: 22px;
+}
+
+.register-card .form-field {
+  margin-bottom: 14px;
+}
+
+.terms-checkbox {
+  margin: 3px 0 24px;
+  align-items: flex-start;
+}
+
+.register-card .form-divider {
+  margin-top: 24px;
+}
+
+/* Focus accessibility */
+
+.primary-button:focus-visible,
+.password-button:focus-visible,
+.text-button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(23, 130, 85, 0.3);
+  outline-offset: 3px;
+}
+
+/* Tablet */
+
+@media (max-width: 860px) {
+  .auth-page {
+    padding: 20px;
+    align-items: start;
+  }
+
+  .auth-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .auth-side-panel {
+    min-height: 285px;
+    padding: 32px;
+  }
+
+  .side-message {
+    max-width: 440px;
+    margin-top: 40px;
+  }
+
+  .side-message h2 {
+    font-size: 36px;
+  }
+
+  .plant-decoration {
+    left: 45%;
+    height: 220px;
+    opacity: 0.72;
+  }
+
+  .auth-form-panel {
+    padding: 44px 32px 50px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 520px) {
+  .auth-page {
+    padding: 0;
+    background-color: #ffffff;
+  }
+
+  .auth-card {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .auth-side-panel {
+    min-height: 230px;
+    padding: 26px 22px;
+  }
+
+  .brand-name {
+    font-size: 23px;
+  }
+
+  .side-message {
+    max-width: 280px;
+    margin-top: 32px;
+  }
+
+  .side-message h2 {
+    font-size: 29px;
+  }
+
+  .side-message p {
+    font-size: 16px;
+  }
+
+  .plant-decoration {
+    left: 55%;
+    opacity: 0.55;
+    transform: scale(0.82);
+    transform-origin: right bottom;
+  }
+
+  .auth-form-panel,
+  .register-card .auth-form-panel {
+    padding: 36px 22px 44px;
+  }
+
+  .form-header h1 {
+    font-size: 34px;
+  }
+
+  .form-options {
+    align-items: flex-start;
+  }
+
+  .form-divider {
+    text-align: center;
+    white-space: normal;
+  }
+}
