@@ -1,0 +1,289 @@
+.workers-heading {
+  display: flex;
+  margin-bottom: 22px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.workers-heading h1 {
+  margin: 0;
+  color: #101827;
+  font-size: 34px;
+  letter-spacing: -1px;
+}
+
+.workers-heading p {
+  margin: 5px 0 0;
+  color: #69788c;
+}
+
+.worker-stat-grid {
+  display: grid;
+  margin-bottom: 22px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.worker-stat {
+  display: flex;
+  min-height: 130px;
+  padding: 24px;
+  align-items: flex-start;
+  gap: 17px;
+  border-radius: 12px;
+}
+
+.worker-stat__icon {
+  display: grid;
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  color: #ffffff;
+  border-radius: 10px;
+  place-items: center;
+}
+
+.worker-stat h2 {
+  margin: 0 0 5px;
+  font-size: 15px;
+}
+
+.worker-stat strong {
+  display: block;
+  color: #101827;
+  font-size: 30px;
+}
+
+.worker-stat p {
+  margin: 3px 0 0;
+  font-size: 13px;
+}
+
+.worker-stat--green {
+  background-color: #edf9ef;
+}
+
+.worker-stat--green .worker-stat__icon {
+  background-color: #087047;
+}
+
+.worker-stat--green p {
+  color: #16884f;
+}
+
+.worker-stat--blue {
+  background-color: #eef9f8;
+}
+
+.worker-stat--blue .worker-stat__icon {
+  background-color: #48ad68;
+}
+
+.worker-stat--blue p {
+  color: #1766aa;
+}
+
+.worker-stat--orange {
+  background-color: #fff8e9;
+}
+
+.worker-stat--orange .worker-stat__icon {
+  background-color: #e89d1e;
+}
+
+.worker-stat--orange p {
+  color: #c96b08;
+}
+
+.worker-table-card {
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid #dfe7e2;
+  border-radius: 12px;
+}
+
+.worker-filters {
+  display: flex;
+  padding: 14px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.worker-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.worker-tabs button,
+.worker-filter-button {
+  min-height: 40px;
+  padding: 0 18px;
+  color: #334155;
+  background-color: #ffffff;
+  border: 1px solid #dce4df;
+  border-radius: 8px;
+}
+
+.worker-tabs button.active {
+  color: #ffffff;
+  background-color: #07613e;
+  border-color: #07613e;
+}
+
+.worker-filter-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.workers-table th,
+.workers-table td {
+  padding: 13px 16px;
+}
+
+.worker-name {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.worker-name strong {
+  font-weight: 500;
+}
+
+.worker-avatar {
+  display: grid;
+  width: 33px;
+  height: 33px;
+  flex-shrink: 0;
+  color: #263548;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #e9eef0;
+  border-radius: 50%;
+  place-items: center;
+}
+
+.availability,
+.compliance {
+  display: inline-flex;
+  padding: 5px 10px;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  border-radius: 7px;
+}
+
+.availability--available {
+  color: #087047;
+  background-color: #dff6e7;
+}
+
+.availability--on-shift {
+  color: #1766aa;
+  background-color: #e1efff;
+}
+
+.availability--unavailable {
+  color: #dc2626;
+  background-color: #ffe4e6;
+}
+
+.compliance--compliant {
+  color: #087047;
+  background-color: #e5f6eb;
+}
+
+.compliance--expiring-soon {
+  color: #b86804;
+  background-color: #fff0cd;
+}
+
+.table-menu-button {
+  display: grid;
+  width: 32px;
+  height: 30px;
+  padding: 0;
+  background-color: #ffffff;
+  border: 1px solid #dce4df;
+  border-radius: 7px;
+  place-items: center;
+}
+
+.table-footer {
+  display: flex;
+  min-height: 65px;
+  padding: 12px 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table-footer p {
+  color: #718096;
+  font-size: 13px;
+}
+
+.pagination {
+  display: flex;
+  gap: 6px;
+}
+
+.pagination button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background-color: #ffffff;
+  border: 1px solid #dfe6e2;
+  border-radius: 7px;
+  place-items: center;
+}
+
+.pagination button.active {
+  color: #ffffff;
+  background-color: #07613e;
+  border-color: #07613e;
+}
+
+@media (max-width: 900px) {
+  .worker-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .worker-filters {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .worker-tabs {
+    width: 100%;
+    padding-bottom: 5px;
+    overflow-x: auto;
+  }
+
+  .worker-tabs button {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 560px) {
+  .workers-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .workers-heading h1 {
+    font-size: 28px;
+  }
+
+  .workers-heading .green-button {
+    width: 100%;
+  }
+
+  .table-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,400 @@
+.review-breadcrumb {
+  display: flex;
+  margin-bottom: 6px;
+  align-items: center;
+  gap: 8px;
+  color: #718096;
+  font-size: 13px;
+}
+
+.review-breadcrumb a {
+  color: #37648b;
+}
+
+.review-heading {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.review-heading h1 {
+  margin: 0;
+  color: #101827;
+  font-size: 32px;
+  letter-spacing: -1px;
+}
+
+.review-heading p {
+  margin: 5px 0 0;
+  color: #69788c;
+}
+
+.review-actions {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.review-status-select {
+  display: grid;
+  gap: 5px;
+  color: #536172;
+  font-size: 11px;
+}
+
+.review-status-select button {
+  display: flex;
+  min-height: 41px;
+  padding: 0 13px;
+  align-items: center;
+  gap: 8px;
+  color: #92530a;
+  background-color: #ffffff;
+  border: 1px solid #dce4df;
+  border-radius: 8px;
+}
+
+.request-button {
+  min-height: 41px;
+  padding: 0 18px;
+  color: #075d3c;
+  font-weight: 600;
+  background-color: #ffffff;
+  border: 1px solid #087047;
+  border-radius: 8px;
+}
+
+.review-layout {
+  display: grid;
+  margin-bottom: 18px;
+  grid-template-columns: minmax(0, 2fr) 350px;
+  gap: 18px;
+}
+
+.review-card {
+  background-color: #ffffff;
+  border: 1px solid #dfe7e2;
+  border-radius: 10px;
+}
+
+.incident-details-card {
+  padding: 14px;
+}
+
+.incident-details-card > header {
+  display: flex;
+  margin-bottom: 7px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.incident-details-card h2,
+.timeline-card h2,
+.follow-up-card h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.incident-details-card > header button {
+  min-height: 32px;
+  padding: 0 13px;
+  background-color: #ffffff;
+  border: 1px solid #dce4df;
+  border-radius: 7px;
+}
+
+.incident-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid #e2e8e4;
+  border-left: 1px solid #e2e8e4;
+}
+
+.incident-detail-grid > div {
+  display: grid;
+  min-height: 64px;
+  padding: 10px;
+  align-content: center;
+  gap: 5px;
+  border-right: 1px solid #e2e8e4;
+  border-bottom: 1px solid #e2e8e4;
+}
+
+.incident-detail-grid span {
+  color: #718096;
+  font-size: 11px;
+}
+
+.incident-detail-grid strong,
+.incident-detail-grid a {
+  color: #25364c;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.incident-detail-grid a {
+  color: #087047;
+  text-decoration: underline;
+}
+
+.review-severity,
+.review-under-status {
+  display: inline-flex;
+  width: fit-content;
+  padding: 4px 8px;
+  align-items: center;
+  gap: 5px;
+  border-radius: 6px;
+}
+
+.incident-detail-grid .review-severity {
+  color: #dc2626;
+  background-color: #ffe3e5;
+}
+
+.incident-detail-grid .review-under-status {
+  color: #b86804;
+  background-color: #fff0cf;
+}
+
+.review-description {
+  display: grid;
+  padding-top: 10px;
+  gap: 9px;
+}
+
+.review-description h3,
+.attachments-section h3 {
+  margin: 0 0 3px;
+  font-size: 13px;
+}
+
+.review-description p {
+  margin: 0;
+  color: #5f6e82;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.attachments-section {
+  margin-top: 11px;
+}
+
+.attachments-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+
+.attachment-card {
+  display: flex;
+  min-height: 54px;
+  padding: 9px;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid #dfe7e2;
+  border-radius: 8px;
+}
+
+.attachment-card > svg {
+  color: #28496b;
+}
+
+.attachment-card div {
+  display: grid;
+  min-width: 0;
+}
+
+.attachment-card strong {
+  overflow: hidden;
+  color: #34445a;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.attachment-card span {
+  color: #718096;
+  font-size: 10px;
+}
+
+.attachment-card button {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  margin-left: auto;
+  padding: 0;
+  background-color: #ffffff;
+  border: 1px solid #dfe7e2;
+  border-radius: 6px;
+  place-items: center;
+}
+
+/* Activity timeline */
+
+.timeline-card {
+  padding: 18px;
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  margin-top: 20px;
+  gap: 21px;
+}
+
+.timeline::before {
+  position: absolute;
+  top: 6px;
+  bottom: 7px;
+  left: 6px;
+  width: 1px;
+  content: "";
+  background-color: #dce5e0;
+}
+
+.timeline-item {
+  position: relative;
+  display: grid;
+  padding-left: 28px;
+}
+
+.timeline-dot {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  z-index: 2;
+  width: 13px;
+  height: 13px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #dce5e0;
+}
+
+.timeline-dot--green {
+  background-color: #20ad60;
+}
+
+.timeline-dot--dark {
+  background-color: #087047;
+}
+
+.timeline-dot--blue {
+  background-color: #2678d8;
+}
+
+.timeline-item time {
+  color: #718096;
+  font-size: 10px;
+}
+
+.timeline-item h3 {
+  margin: 4px 0;
+  color: #28384c;
+  font-size: 12px;
+}
+
+.timeline-item p {
+  margin: 2px 0 0;
+  color: #607086;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.activity-button {
+  width: 100%;
+  min-height: 40px;
+  margin-top: 20px;
+  color: #075d3c;
+  font-weight: 600;
+  background-color: #e3f5e9;
+  border: 0;
+  border-radius: 8px;
+}
+
+/* Follow-up actions */
+
+.follow-up-card {
+  overflow: hidden;
+}
+
+.follow-up-card h2 {
+  padding: 13px 14px;
+  border-bottom: 1px solid #e2e8e4;
+}
+
+.follow-up-card th,
+.follow-up-card td {
+  padding: 8px 14px;
+  font-size: 11px;
+}
+
+.action-status {
+  display: inline-flex;
+  padding: 4px 9px;
+  border-radius: 5px;
+}
+
+.action-status--open {
+  color: #1766aa;
+  background-color: #e1efff;
+}
+
+.action-status--in-progress {
+  color: #b86804;
+  background-color: #fff0cf;
+}
+
+.action-status--not-started {
+  color: #64748b;
+  background-color: #eef1f3;
+}
+
+.follow-up-menu {
+  padding: 0;
+  background: none;
+  border: 0;
+}
+
+@media (max-width: 1150px) {
+  .review-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .review-actions {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .review-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .review-heading h1 {
+    font-size: 28px;
+  }
+
+  .review-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .review-status-select button,
+  .request-button,
+  .review-actions .green-button {
+    width: 100%;
+  }
+
+  .incident-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .attachments-grid {
+    grid-template-columns: 1fr;
+  }
+}

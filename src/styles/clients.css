@@ -1,0 +1,279 @@
+.clients-heading {
+  display: flex;
+  margin-bottom: 24px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.clients-heading h1 {
+  margin: 0;
+  color: #101827;
+  font-size: 34px;
+  letter-spacing: -1px;
+}
+
+.clients-heading p {
+  margin: 5px 0 0;
+  color: #69788c;
+}
+
+.clients-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 20px;
+}
+
+.client-tabs {
+  display: flex;
+  margin-bottom: 16px;
+  gap: 8px;
+}
+
+.client-tabs button {
+  min-height: 40px;
+  padding: 0 18px;
+  color: #334155;
+  background-color: #ffffff;
+  border: 1px solid #dce4df;
+  border-radius: 8px;
+}
+
+.client-tabs button.active {
+  color: #ffffff;
+  background-color: #07613e;
+  border-color: #07613e;
+}
+
+.clients-table-card,
+.client-details {
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid #dfe7e2;
+  border-radius: 12px;
+}
+
+.clients-table th,
+.clients-table td {
+  padding: 13px 10px;
+  font-size: 12px;
+}
+
+.clients-table tbody tr {
+  cursor: pointer;
+}
+
+.selected-client-row {
+  background-color: #e9f8ed;
+}
+
+.client-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.client-name > span {
+  display: grid;
+  width: 29px;
+  height: 29px;
+  flex-shrink: 0;
+  font-size: 10px;
+  background-color: #e5eaed;
+  border-radius: 50%;
+  place-items: center;
+}
+
+.client-name strong {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.client-status {
+  display: inline-flex;
+  padding: 5px 10px;
+  font-size: 11px;
+  border-radius: 7px;
+}
+
+.client-status--active {
+  color: #087047;
+  background-color: #ddf5e5;
+}
+
+.client-status--inactive {
+  color: #dc2626;
+  background-color: #ffe4e6;
+}
+
+.client-menu-button {
+  display: grid;
+  width: 30px;
+  height: 28px;
+  padding: 0;
+  background-color: #f0f4f2;
+  border: 0;
+  border-radius: 6px;
+  place-items: center;
+}
+
+/* Client information panel */
+
+.client-details {
+  padding: 20px;
+}
+
+.client-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.client-large-avatar {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  color: #087047;
+  font-size: 19px;
+  font-weight: 700;
+  background-color: #dff5e6;
+  border-radius: 50%;
+  place-items: center;
+}
+
+.client-profile-header h2 {
+  margin: 0 0 7px;
+  font-size: 20px;
+}
+
+.client-profile-header > button {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+  padding: 0;
+  background: none;
+  border: 0;
+  place-items: center;
+}
+
+.client-detail-tabs {
+  display: flex;
+  margin-top: 22px;
+  border-bottom: 1px solid #dfe7e2;
+}
+
+.client-detail-tabs button {
+  padding: 10px 8px;
+  font-size: 12px;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+}
+
+.client-detail-tabs button.active {
+  color: #07613e;
+  font-weight: 600;
+  border-bottom-color: #07613e;
+}
+
+.client-information {
+  display: grid;
+  padding: 18px 0;
+  gap: 17px;
+}
+
+.information-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+}
+
+.information-row svg {
+  flex-shrink: 0;
+  color: #17364a;
+}
+
+.information-row p {
+  margin: 0;
+  color: #334155;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.information-row p span {
+  display: block;
+  color: #738078;
+}
+
+.client-summary-section {
+  padding: 17px 0;
+  border-top: 1px solid #e2e8e4;
+}
+
+.summary-heading {
+  display: flex;
+  gap: 13px;
+}
+
+.summary-heading svg {
+  flex-shrink: 0;
+  color: #087047;
+}
+
+.summary-heading h3 {
+  margin: 0 0 6px;
+  font-size: 13px;
+}
+
+.summary-heading p {
+  margin: 0;
+  color: #526175;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.client-details-button {
+  width: 100%;
+  min-height: 40px;
+  color: #075d3c;
+  font-weight: 600;
+  background-color: #e3f5e9;
+  border: 0;
+  border-radius: 8px;
+}
+
+@media (max-width: 1200px) {
+  .clients-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .client-details {
+    max-width: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .clients-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .clients-heading h1 {
+    font-size: 28px;
+  }
+
+  .clients-heading .green-button {
+    width: 100%;
+  }
+
+  .client-tabs {
+    padding-bottom: 5px;
+    overflow-x: auto;
+  }
+
+  .client-tabs button {
+    white-space: nowrap;
+  }
+}
