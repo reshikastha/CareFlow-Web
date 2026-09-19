@@ -8,6 +8,9 @@ import {
   TriangleAlert,
   UserRound,
   UsersRound,
+  User,
+  Calendar
+
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
@@ -16,8 +19,8 @@ import '../styles/dashboard.css';
 
 const menuItems = [
   {
-    name: "Dashboard",
-    path: "/dashboard",
+    name: "Admin Dashboard",
+    path: "/admindashboard",
     icon: LayoutDashboard,
   },
   {
@@ -50,11 +53,47 @@ const menuItems = [
     path: "/reports",
     icon: BarChart3,
   },
+  
+];
+
+const userMenu = [
   {
-    name: "Settings",
-    path: "/settings",
-    icon: Settings,
+    name: "Dashboard",
+    path: "/dashboard",
+    icon: LayoutDashboard,
   },
+  {
+    name: "My Shifts",
+    path: "/myshifts",
+    icon: CalendarDays,
+  },
+ 
+  {
+    name: "My Clients",
+    path: "/myclients",
+    icon: UsersRound,
+  },
+  {
+    name: "Availability",
+    path: "/availability",
+    icon: Clock3,
+  },
+  {
+    name: "Leave",
+    path: "/leave",
+    icon: Calendar,
+  },
+  {
+    name: "Incidents",
+    path: "/incidents",
+    icon: TriangleAlert,
+  },
+  {
+    name: "Profile",
+    path: "/profile",
+    icon: User,
+  },
+  
 ];
 
 function Sidebar() {
@@ -63,7 +102,7 @@ function Sidebar() {
       <BrandLogo />
 
       <nav className="sidebar-nav">
-        {menuItems.map((item) => {
+        {userMenu.map((item) => {
           const Icon = item.icon;
 
           return (
