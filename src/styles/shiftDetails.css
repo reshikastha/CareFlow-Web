@@ -1,0 +1,349 @@
+.shift-breadcrumb {
+  display: flex;
+  margin-bottom: 10px;
+  gap: 8px;
+  color: #53657d;
+  font-size: 13px;
+}
+
+.shift-details-heading {
+  display: flex;
+  margin-bottom: 22px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.shift-details-heading h1 {
+  margin: 0;
+  color: #101827;
+  font-size: 32px;
+  letter-spacing: -1px;
+}
+
+.shift-details-heading p {
+  margin: 5px 0 0;
+  color: #66758a;
+}
+
+.progress-status {
+  display: inline-flex;
+  padding: 7px 13px;
+  align-items: center;
+  gap: 6px;
+  color: #b86804;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #fff0cf;
+  border-radius: 7px;
+}
+
+.shift-client-card {
+  display: grid;
+  margin-bottom: 14px;
+  padding: 20px;
+  align-items: center;
+  grid-template-columns: 1.4fr 0.7fr 0.7fr;
+  gap: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dce5e0;
+  border-radius: 10px;
+}
+
+.shift-client-primary {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.shift-client-avatar {
+  display: grid;
+  width: 69px;
+  height: 69px;
+  flex-shrink: 0;
+  color: #087047;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: #dff5e6;
+  border-radius: 50%;
+  place-items: center;
+}
+
+.shift-client-primary h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.shift-client-primary p {
+  margin: 5px 0 8px;
+  color: #64748b;
+}
+
+.shift-client-primary span,
+.shift-contact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #42536a;
+  font-size: 12px;
+}
+
+.shift-contact div {
+  display: grid;
+}
+
+.shift-contact span {
+  margin-top: 3px;
+  color: #718096;
+  font-size: 11px;
+}
+
+.shift-action-buttons {
+  display: grid;
+  gap: 10px;
+}
+
+.direction-button,
+.checkout-button {
+  display: inline-flex;
+  min-height: 41px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  border-radius: 7px;
+}
+
+.direction-button {
+  color: #087047;
+  background-color: #ffffff;
+  border: 1px solid #087047;
+}
+
+.checkout-button {
+  color: #ffffff;
+  background-color: #087047;
+  border: 1px solid #087047;
+}
+
+.shift-information {
+  display: flex;
+  padding-top: 17px;
+  grid-column: 1 / -1;
+  justify-content: space-between;
+  gap: 15px;
+  border-top: 1px solid #e2e8e4;
+}
+
+.shift-information span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #42536a;
+  font-size: 12px;
+}
+
+.privacy-message {
+  display: flex;
+  margin-bottom: 16px;
+  padding: 16px 20px;
+  align-items: flex-start;
+  gap: 14px;
+  color: #1f4f7a;
+  background-color: #eef7fc;
+  border-radius: 8px;
+}
+
+.privacy-message p {
+  display: grid;
+  margin: 0;
+  font-size: 12px;
+}
+
+.privacy-message p span {
+  margin-top: 5px;
+  color: #536a82;
+}
+
+.shift-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.shift-detail-card {
+  background-color: #ffffff;
+  border: 1px solid #dce5e0;
+  border-radius: 9px;
+}
+
+.shift-detail-card header {
+  display: flex;
+  min-height: 50px;
+  padding: 11px 14px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e4ebe7;
+}
+
+.shift-detail-card h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.support-plan-card header button {
+  padding: 7px 11px;
+  color: #087047;
+  font-size: 11px;
+  font-weight: 600;
+  background-color: #dff5e6;
+  border: 0;
+  border-radius: 6px;
+}
+
+.plan-section {
+  display: flex;
+  margin: 0 14px;
+  padding: 17px 0;
+  gap: 13px;
+  border-bottom: 1px solid #e5ebe7;
+}
+
+.plan-section:last-child {
+  border-bottom: 0;
+}
+
+.plan-section svg {
+  flex-shrink: 0;
+  color: #087047;
+}
+
+.plan-section h3 {
+  margin: 0;
+  font-size: 13px;
+}
+
+.plan-section ul {
+  margin: 8px 0 0;
+  padding-left: 17px;
+  color: #5c6c81;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.shift-right-column {
+  display: grid;
+  gap: 14px;
+}
+
+.shift-tasks-card header > span {
+  color: #087047;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.shift-task {
+  display: grid;
+  min-height: 40px;
+  padding: 8px 14px;
+  align-items: center;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  border-bottom: 1px solid #e8eeea;
+}
+
+.shift-task:last-child {
+  border-bottom: 0;
+}
+
+.shift-task input {
+  width: 18px;
+  height: 18px;
+  accent-color: #087047;
+}
+
+.shift-task span,
+.shift-task time {
+  font-size: 11px;
+}
+
+.shift-task time {
+  color: #65758a;
+}
+
+.shift-notes-card {
+  padding: 13px;
+}
+
+.shift-notes-card h2 {
+  margin-bottom: 9px;
+}
+
+.notes-input {
+  position: relative;
+}
+
+.notes-input textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 11px;
+  resize: vertical;
+  border: 1px solid #d5dfe6;
+  border-radius: 7px;
+  outline: 0;
+}
+
+.notes-input span {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  color: #718096;
+  font-size: 10px;
+}
+
+.shift-notes-card > button {
+  display: block;
+  min-width: 150px;
+  min-height: 39px;
+  margin: 10px 0 0 auto;
+  color: #ffffff;
+  font-weight: 600;
+  background-color: #087047;
+  border: 0;
+  border-radius: 7px;
+}
+
+@media (max-width: 900px) {
+  .shift-client-card {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .shift-action-buttons {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .shift-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .shift-details-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .shift-client-card {
+    grid-template-columns: 1fr;
+  }
+
+  .shift-contact,
+  .shift-action-buttons {
+    grid-column: auto;
+  }
+
+  .shift-information {
+    flex-direction: column;
+  }
+}

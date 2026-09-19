@@ -1,0 +1,265 @@
+.report-incident-heading {
+  margin-bottom: 18px;
+}
+
+.report-incident-heading h1 {
+  margin: 0;
+  color: #101827;
+  font-size: 32px;
+  letter-spacing: -1px;
+}
+
+.report-incident-heading p {
+  margin: 5px 0 0;
+  color: #68778a;
+}
+
+.emergency-warning {
+  display: flex;
+  margin-bottom: 18px;
+  padding: 13px 17px;
+  align-items: flex-start;
+  gap: 12px;
+  color: #dc2626;
+  background-color: #fff0f1;
+  border: 1px solid #ffd7da;
+  border-radius: 7px;
+}
+
+.emergency-warning p {
+  display: grid;
+  margin: 0;
+  font-size: 12px;
+}
+
+.emergency-warning p span {
+  margin-top: 4px;
+  color: #7b4a4e;
+  font-size: 11px;
+}
+
+.incident-progress {
+  position: relative;
+  display: flex;
+  max-width: 650px;
+  margin: 0 auto 20px;
+  justify-content: space-between;
+}
+
+.incident-progress::before {
+  position: absolute;
+  top: 16px;
+  right: 10%;
+  left: 10%;
+  height: 1px;
+  content: "";
+  background-color: #d8e1e7;
+}
+
+.incident-progress > div {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+}
+
+.incident-progress div > span {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  color: #27405d;
+  background-color: #e3ebf5;
+  border-radius: 50%;
+  place-items: center;
+}
+
+.incident-progress div.active > span {
+  color: #ffffff;
+  background-color: #087047;
+}
+
+.incident-progress strong {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.report-incident-form {
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #dce5e0;
+  border-radius: 9px;
+}
+
+.report-incident-form > header {
+  margin-bottom: 17px;
+}
+
+.report-incident-form header h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.report-incident-form header p {
+  margin: 4px 0 0;
+  color: #68778a;
+  font-size: 11px;
+}
+
+.incident-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 17px;
+}
+
+.incident-form-grid > label,
+.incident-form-grid > div {
+  display: grid;
+  gap: 7px;
+  color: #26364b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.incident-form-grid b {
+  color: #dc2626;
+}
+
+.incident-form-grid input,
+.incident-form-grid select {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  color: #26364b;
+  background-color: #ffffff;
+  border: 1px solid #d5dfe6;
+  border-radius: 7px;
+  outline: 0;
+}
+
+.incident-input-icon {
+  display: flex;
+  min-height: 40px;
+  padding-left: 12px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #d5dfe6;
+  border-radius: 7px;
+}
+
+.incident-input-icon input {
+  min-height: 38px;
+  padding-left: 0;
+  border: 0;
+}
+
+.incident-select {
+  position: relative;
+}
+
+.incident-select select {
+  appearance: none;
+  padding-right: 35px;
+}
+
+.incident-select > svg {
+  position: absolute;
+  top: 12px;
+  right: 11px;
+  pointer-events: none;
+}
+
+.attachment-title {
+  font-size: 11px;
+}
+
+.incident-file-upload {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px dashed #aab9c8;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.incident-file-upload span {
+  display: grid;
+  font-size: 10px;
+  text-align: center;
+}
+
+.incident-file-upload small {
+  margin-top: 3px;
+  color: #718096;
+}
+
+.incident-confirmation {
+  display: flex;
+  margin-top: 18px;
+  align-items: center;
+  gap: 8px;
+  color: #526175;
+  font-size: 10px;
+}
+
+.incident-confirmation input {
+  width: 17px;
+  height: 17px;
+  accent-color: #087047;
+}
+
+.incident-form-message {
+  display: flex;
+  margin: 13px 0 0;
+  align-items: center;
+  gap: 7px;
+  color: #087047;
+  font-size: 11px;
+}
+
+.report-incident-form footer {
+  display: flex;
+  margin-top: 16px;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.report-incident-form footer button {
+  min-width: 145px;
+  min-height: 41px;
+  font-weight: 600;
+  border-radius: 7px;
+}
+
+.report-incident-form footer button:first-child {
+  color: #087047;
+  background-color: #ffffff;
+  border: 1px solid #087047;
+}
+
+.report-incident-form footer button:last-child {
+  color: #ffffff;
+  background-color: #087047;
+  border: 1px solid #087047;
+}
+
+@media (max-width: 700px) {
+  .report-incident-heading h1 {
+    font-size: 28px;
+  }
+
+  .incident-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .report-incident-form footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .report-incident-form footer button {
+    min-width: 0;
+  }
+}

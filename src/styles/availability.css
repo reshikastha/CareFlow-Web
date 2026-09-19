@@ -1,0 +1,287 @@
+.availability-heading {
+  margin-bottom: 20px;
+}
+
+.availability-heading h1 {
+  margin: 0;
+  color: #101827;
+  font-size: 32px;
+  letter-spacing: -1px;
+}
+
+.availability-heading p {
+  margin: 5px 0 0;
+  color: #68778a;
+}
+
+.availability-layout {
+  display: grid;
+  grid-template-columns: minmax(550px, 1.5fr) minmax(290px, 0.75fr);
+  gap: 16px;
+}
+
+.availability-layout > div {
+  display: grid;
+  gap: 14px;
+}
+
+.availability-card,
+.preferred-hours-card {
+  background-color: #ffffff;
+  border: 1px solid #dce5e0;
+  border-radius: 9px;
+}
+
+.availability-card > header,
+.preferred-hours-card > header {
+  padding: 14px;
+}
+
+.availability-card header h2,
+.preferred-hours-card header h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.availability-card header p,
+.preferred-hours-card header p {
+  margin: 4px 0 0;
+  color: #68778a;
+  font-size: 11px;
+}
+
+.availability-table {
+  padding: 0 14px 14px;
+}
+
+.availability-row {
+  display: grid;
+  min-height: 48px;
+  align-items: center;
+  grid-template-columns: 110px 145px 1fr 1fr;
+  gap: 12px;
+}
+
+.availability-row strong {
+  font-size: 12px;
+}
+
+.availability-labels {
+  min-height: 35px;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.availability-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.availability-toggle input {
+  position: absolute;
+  opacity: 0;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background-color: #94a3b8;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+
+.toggle-switch::after {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  content: "";
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.availability-toggle input:checked + .toggle-switch {
+  background-color: #087047;
+}
+
+.availability-toggle input:checked + .toggle-switch::after {
+  transform: translateX(16px);
+}
+
+.availability-toggle em {
+  font-size: 11px;
+  font-style: normal;
+}
+
+.time-select {
+  display: flex;
+  min-height: 37px;
+  padding: 0 11px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border: 1px solid #d5dfe6;
+  border-radius: 7px;
+}
+
+.time-select:disabled {
+  color: #94a3b8;
+  background-color: #f3f5f6;
+}
+
+.exceptions-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-exception-button {
+  display: inline-flex;
+  min-height: 37px;
+  padding: 0 14px;
+  align-items: center;
+  gap: 7px;
+  color: #087047;
+  font-weight: 600;
+  background-color: #ffffff;
+  border: 1px solid #087047;
+  border-radius: 7px;
+}
+
+.exceptions-card th,
+.exceptions-card td {
+  padding: 10px 14px;
+  font-size: 11px;
+}
+
+.unavailable-label {
+  display: inline-flex;
+  padding: 5px 9px;
+  color: #dc2626;
+  background-color: #ffe4e6;
+  border-radius: 6px;
+}
+
+.preferred-hours-card {
+  align-self: start;
+  padding: 14px;
+}
+
+.preferred-hours-card > header {
+  padding: 0 0 16px;
+}
+
+.preferred-hours-card > label {
+  display: grid;
+  margin-bottom: 18px;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hours-input {
+  display: flex;
+  min-height: 42px;
+  padding: 0 12px;
+  align-items: center;
+  border: 1px solid #d5dfe6;
+  border-radius: 7px;
+}
+
+.hours-input input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+}
+
+.hours-input span {
+  color: #526175;
+  font-weight: 400;
+}
+
+.preferred-hours-card select {
+  min-height: 42px;
+  padding: 0 11px;
+  background-color: #ffffff;
+  border: 1px solid #d5dfe6;
+  border-radius: 7px;
+}
+
+.availability-info {
+  display: flex;
+  padding: 14px;
+  align-items: flex-start;
+  gap: 10px;
+  color: #087047;
+  background-color: #eef8fc;
+  border-radius: 7px;
+}
+
+.availability-info p {
+  display: grid;
+  margin: 0;
+  color: #24364c;
+  font-size: 11px;
+}
+
+.availability-info p span {
+  margin-top: 5px;
+  color: #5f6e82;
+  line-height: 1.5;
+}
+
+.preferred-hours-card footer {
+  display: grid;
+  margin-top: 16px;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 10px;
+}
+
+.preferred-hours-card footer button {
+  min-height: 40px;
+  font-weight: 600;
+  border-radius: 7px;
+}
+
+.preferred-hours-card footer button:first-child {
+  color: #087047;
+  background-color: #ffffff;
+  border: 1px solid #087047;
+}
+
+.preferred-hours-card footer button:last-child {
+  color: #ffffff;
+  background-color: #087047;
+  border: 1px solid #087047;
+}
+
+@media (max-width: 1050px) {
+  .availability-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .availability-heading h1 {
+    font-size: 28px;
+  }
+
+  .availability-card {
+    overflow-x: auto;
+  }
+
+  .availability-table {
+    min-width: 650px;
+  }
+
+  .exceptions-card header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

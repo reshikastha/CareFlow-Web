@@ -9,7 +9,8 @@ import {
   UserRound,
   UsersRound,
   User,
-  Calendar
+  Calendar,
+  ClipboardCheck
 
 } from "lucide-react";
 
@@ -57,41 +58,41 @@ const menuItems = [
 ];
 
 const userMenu = [
-  {
+ {
     name: "Dashboard",
-    path: "/dashboard",
+    path: "/carer/dashboard",
     icon: LayoutDashboard,
   },
   {
-    name: "My Shifts",
-    path: "/myshifts",
+    name: "My shifts",
+    path: "/carer/shifts",
     icon: CalendarDays,
   },
- 
   {
-    name: "My Clients",
-    path: "/myclients",
+    name: "My clients",
+    path: "/carer/clients",
     icon: UsersRound,
   },
   {
     name: "Availability",
-    path: "/availability",
-    icon: Clock3,
+    path: "/carer/availability",
+    icon: ClipboardCheck,
   },
   {
     name: "Leave",
-    path: "/leave",
-    icon: Calendar,
+    path: "/carer/leave",
+    icon: CalendarDays,
   },
   {
     name: "Incidents",
-    path: "/incidents",
+    path: "/carer/incidents",
     icon: TriangleAlert,
   },
+  
   {
     name: "Profile",
-    path: "/profile",
-    icon: User,
+    path: "/carer/profile",
+    icon: UserRound,
   },
   
 ];
