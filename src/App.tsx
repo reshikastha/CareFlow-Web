@@ -23,6 +23,7 @@ import LeaveRequests from "./pages/LeaveRequests";
 import CarerIncidents from "./pages/CarerIncidents";
 import ReportIncident from "./pages/ReportIncident";
 import MyProfile from "./pages/MyProfile";
+import EditProfile from "./pages/EditProfile";
 // import "./styles/auth.css";
 
 function App() {
@@ -54,7 +55,7 @@ function App() {
       <Route path="/carer/incidents" element={<CarerIncidents />}/>
       <Route path="/carer/incidents/report" element={<ReportIncident />}/>
       <Route  path="/carer/profile"  element={<MyProfile />}/>
-
+      <Route  path="/carer/profile/edit"  element={<EditProfile  />}/>
       </Routes>
     </BrowserRouter>
   );

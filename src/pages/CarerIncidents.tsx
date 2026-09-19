@@ -227,6 +227,9 @@ function CarerIncidents() {
                       <button
                         className="incident-number"
                         type="button"
+                         onClick={() =>
+                          navigate(`/incidents/${incident.id}`)
+                        }
                       >
                         {incident.id}
                       </button>

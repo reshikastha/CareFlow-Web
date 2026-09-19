@@ -13,6 +13,8 @@ import { useState } from "react";
 import AppLayout from "../components/AppLayout";
 import "../styles/myProfile.css";
 
+import { useNavigate } from "react-router-dom";
+
 interface NotificationPreference {
   email: boolean;
   push: boolean;
@@ -42,6 +44,8 @@ const complianceItems = [
 ];
 
 function MyProfile() {
+
+     const navigate = useNavigate();
   const [preferences, setPreferences] =
     useState<NotificationPreference>({
       email: true,
@@ -61,7 +65,7 @@ function MyProfile() {
             </p>
           </div>
 
-          <button type="button">
+          <button type="button" onClick={() => navigate("/carer/profile/edit")}>
             <Edit3 size={17} />
             Edit profile
           </button>

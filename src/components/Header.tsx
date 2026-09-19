@@ -5,12 +5,15 @@ import {
   Search,
 } from "lucide-react";
 import '../styles/dashboard.css';
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   onMenuClick?: () => void;
 }
 
 function Header({ onMenuClick }: HeaderProps) {
+
+  const navigate = useNavigate()
   return (
     <header className="top-header">
       <button
@@ -40,20 +43,22 @@ function Header({ onMenuClick }: HeaderProps) {
           <span />
         </button>
 
+
+      <div className="profile-div" onClick={()=> navigate("/carer/profile/edit")}>
         <div className="profile-avatar">R</div>
 
-        <div className="profile-information">
+        <div className="profile-information" >
           <strong>Reshika</strong>
           <span>Admin</span>
         </div>
-
-        <button
+      </div>
+        {/* <button
           className="profile-menu-button"
           type="button"
           aria-label="Open profile menu"
         >
           <ChevronDown size={20} />
-        </button>
+        </button> */}
       </div>
     </header>
   );
