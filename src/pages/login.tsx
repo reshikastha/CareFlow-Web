@@ -5,45 +5,69 @@ import {
 } from "react";
 
 import { Mail } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 
 import AuthSidePanel from "../components/AuthSidePanel";
 import PasswordInput from "../components/PasswordInput";
 import '../styles/auth.css'
+import { loginUser } from "../services/authApi";
 
 interface LoginFormData {
   email: string;
   password: string;
-  rememberMe: boolean;
+ 
 }
 
 function Login() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: "",
-    rememberMe: false,
   });
 
-  const [message, setMessage] = useState("");
+
+    const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleInputChange(
     event: ChangeEvent<HTMLInputElement>
   ) {
-    const { name, value, type, checked } = event.target;
+      const { name, value } = event.target;
 
     setFormData((currentData) => ({
       ...currentData,
-      [name]: type === "checkbox" ? checked : value,
+        [name]: value,
     }));
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+ const handleLogin = async (
+    event: FormEvent<HTMLFormElement>,
+  ) => {
     event.preventDefault();
 
-    console.log("Login details:", formData);
+    setError("");
 
-    setMessage("Login form submitted successfully.");
-  }
+    try {
+      setIsLoading(true);
+
+      const response = await loginUser(formData);
+
+      // Send users to different dashboards based on role.
+      if (response.user.role === "ADMIN") {
+        navigate("/admindashboard");
+      } else {
+        navigate("/carer/dashboard");
+      }
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Login failed.",
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <main className="auth-page">
@@ -51,7 +75,7 @@ function Login() {
         <AuthSidePanel title="Better care today for a brighter tomorrow." />
 
         <div className="auth-form-panel">
-          <form className="auth-form" onSubmit={handleSubmit}>
+          <form className="auth-form" onSubmit={handleLogin}>
             <header className="form-header">
               <h1>Welcome back</h1>
               <p>Sign in to your CareFlow account</p>
@@ -90,16 +114,7 @@ function Login() {
             />
 
             <div className="form-options">
-              <label className="checkbox-container">
-                <input
-                  name="rememberMe"
-                  type="checkbox"
-                  checked={formData.rememberMe}
-                  onChange={handleInputChange}
-                />
-
-                <span>Remember me</span>
-              </label>
+            
 
               <button
                 className="text-button"
@@ -112,13 +127,14 @@ function Login() {
               </button>
             </div>
 
-            <button className="primary-button" type="submit">
-              Sign in
+
+            {error && <p className="error-message">{error}</p>}
+
+            <button className="primary-button" type="submit" disabled={isLoading}>
+               {isLoading ? "Logging in..." : "Login"}
             </button>
 
-            {message && (
-              <p className="form-message">{message}</p>
-            )}
+           
 
             <div className="form-divider">
               <span>New to CareFlow?</span>

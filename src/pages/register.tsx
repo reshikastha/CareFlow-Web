@@ -9,45 +9,49 @@ import {
   UserRound,
 } from "lucide-react";
 
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 
 import AuthSidePanel from "../components/AuthSidePanel";
 import PasswordInput from "../components/PasswordInput";
 import '../styles/auth.css'
+import { registerUser } from "../services/authApi";
 
 interface RegisterFormData {
   fullName: string;
   email: string;
   password: string;
   confirmPassword: string;
-  acceptTerms: boolean;
+  
 }
 
 function Register() {
+ const navigate = useNavigate();
+
   const [formData, setFormData] =
     useState<RegisterFormData>({
       fullName: "",
       email: "",
       password: "",
       confirmPassword: "",
-      acceptTerms: false,
+      
     });
 
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
   function handleInputChange(
     event: ChangeEvent<HTMLInputElement>
   ) {
-    const { name, value, type, checked } = event.target;
+    const { name, value } = event.target;
 
-    setFormData((currentData) => ({
-      ...currentData,
-      [name]: type === "checkbox" ? checked : value,
+    setFormData((currentForm) => ({
+      ...currentForm,
+      [name]: value,
     }));
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleSubmit = async(event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setError("");
@@ -63,14 +67,24 @@ function Register() {
       return;
     }
 
-    if (!formData.acceptTerms) {
-      setError("Please accept the terms and privacy policy.");
-      return;
+   try {
+      setIsLoading(true);
+
+      const response = await registerUser(formData);
+
+      setMessage(response.message);
+
+      // Go to login after successful registration.
+      navigate("/login");
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Registration failed.",
+      );
+    } finally {
+      setIsLoading(false);
     }
-
-    console.log("Registration details:", formData);
-
-    setMessage("Account form submitted successfully.");
   }
 
   return (
@@ -157,23 +171,10 @@ function Register() {
               required
             />
 
-            <label className="checkbox-container terms-checkbox">
-              <input
-                name="acceptTerms"
-                type="checkbox"
-                checked={formData.acceptTerms}
-                onChange={handleInputChange}
-              />
+           
 
-              <span>
-                I agree to the{" "}
-                <a href="/terms">Terms</a> and{" "}
-                <a href="/privacy">Privacy Policy</a>
-              </span>
-            </label>
-
-            <button className="primary-button" type="submit">
-              Create account
+            <button className="primary-button" type="submit" disabled={isLoading}>
+                 {isLoading ? "Creating account..." : "Register"}
             </button>
 
             {error && (
