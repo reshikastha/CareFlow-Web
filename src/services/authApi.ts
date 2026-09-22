@@ -116,8 +116,16 @@ export async function loginUser(
   const data =
     await handleResponse<LoginResponse>(response);
 
-  // Save the token for protected API requests.
-  localStorage.setItem("careflow_token", data.token);
+    console.log("Login response:", data);
+  console.log("Logged-in user:", data.user);
+  console.log("User ID:", data.user.id);
+  console.log("User role:", data.user.role);
+
+  localStorage.setItem(
+    "careflow_token",
+    data.token,
+  );
+
 
   // Save non-sensitive user information.
   localStorage.setItem(
@@ -138,6 +146,8 @@ export function getAuthToken(): string | null {
 /*
  * Return the saved logged-in user.
  */
+
+
 export function getStoredUser(): AuthUser | null {
   const savedUser = localStorage.getItem("careflow_user");
 
@@ -148,6 +158,7 @@ export function getStoredUser(): AuthUser | null {
   try {
     return JSON.parse(savedUser) as AuthUser;
   } catch {
+    localStorage.removeItem("careflow_user");
     return null;
   }
 }

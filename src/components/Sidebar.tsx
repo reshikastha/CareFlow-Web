@@ -10,13 +10,19 @@ import {
   UsersRound,
   User,
   Calendar,
+  LogOut,
   ClipboardCheck
 
 } from "lucide-react";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate  } from "react-router-dom";
 import BrandLogo from "./BrandLogo";
 import '../styles/dashboard.css';
+
+import {
+  getStoredUser,
+  logoutUser,
+} from "../services/authApi";
 
 const menuItems = [
   {
@@ -98,12 +104,40 @@ const userMenu = [
 ];
 
 function Sidebar() {
+  const navigate = useNavigate();
+    // Get the user saved after login.
+  const user = getStoredUser();
+
+  /*
+   * Select the correct menu based on the user's role.
+   *
+   * ADMIN receives adminMenu.
+   * CARE_WORKER receives carerMenu.
+   */
+  const selectedMenu =
+    user?.role === "ADMIN" ? menuItems : userMenu;
+
+console.log( user?.role)
+     const handleLogout = () => {
+    // Remove the token and user from localStorage.
+    logoutUser();
+
+    // Return to login and remove the current page from history.
+    navigate("/login", {
+      replace: true,
+    });
+  };
+
+  // Do not display a sidebar when there is no logged-in user.
+  if (!user) {
+    return null;
+  }
   return (
     <aside className="sidebar">
       <BrandLogo />
 
       <nav className="sidebar-nav">
-        {userMenu.map((item) => {
+        {selectedMenu?.map((item) => {
           const Icon = item.icon;
 
           return (
@@ -121,13 +155,16 @@ function Sidebar() {
         })}
       </nav>
 
-      <nav className="support-card">
-
-        <NavLink>
-          
-              <span style={{margin: "50px"}}>Logout</span>
-        </NavLink>
-       </nav>
+     <div className="support-card">
+        <button
+          type="button"
+          className="logout-button"
+          onClick={handleLogout}
+        >
+          <LogOut size={20} strokeWidth={1.8} />
+          <span>Logout</span>
+        </button>
+      </div>
             
 
   

@@ -17,6 +17,11 @@
   margin: 5px 0 0;
   color: #68778a;
 }
+.profile-image {
+  display: block;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
 .profile-heading > button {
   display: inline-flex;
