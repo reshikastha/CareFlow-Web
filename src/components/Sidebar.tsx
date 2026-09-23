@@ -14,6 +14,10 @@ import {
   ClipboardCheck
 
 } from "lucide-react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
 import { NavLink, useNavigate  } from "react-router-dom";
 import BrandLogo from "./BrandLogo";
@@ -23,6 +27,7 @@ import {
   getStoredUser,
   logoutUser,
 } from "../services/authApi";
+import { getProfile, type UserProfile } from "../services/profileApi";
 
 const menuItems = [
   {
@@ -105,8 +110,29 @@ const userMenu = [
 
 function Sidebar() {
   const navigate = useNavigate();
+
+  const [profile, setProfile] = useState<UserProfile | null>(null);
     // Get the user saved after login.
-  const user = getStoredUser();
+
+     
+
+useEffect(() => {
+  const loadProfile = async () => {
+    try {
+
+      // Wait for profile data from the backend.
+      const profileData = await getProfile();
+      // Save the returned profile in state.
+      setProfile(profileData);
+    } catch (error) {
+      console.log("Unable to load your profile.")
+    } 
+  };
+
+  loadProfile();
+}, []);
+//   // ...
+
 
   /*
    * Select the correct menu based on the user's role.
@@ -115,9 +141,9 @@ function Sidebar() {
    * CARE_WORKER receives carerMenu.
    */
   const selectedMenu =
-    user?.role === "ADMIN" ? menuItems : userMenu;
+    profile?.role === "ADMIN" ? menuItems : menuItems;
 
-console.log( user?.role)
+console.log( profile?.role)
      const handleLogout = () => {
     // Remove the token and user from localStorage.
     logoutUser();
@@ -128,10 +154,7 @@ console.log( user?.role)
     });
   };
 
-  // Do not display a sidebar when there is no logged-in user.
-  if (!user) {
-    return null;
-  }
+  
   return (
     <aside className="sidebar">
       <BrandLogo />

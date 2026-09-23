@@ -26,7 +26,7 @@ export type ComplianceDocument = {
 export type UserProfile = {
   id: number;
   image: string | null;
-  fullName: string;
+  fullName?: string | undefined;
   phone: string | null;
 
   // Email is displayed but not editable.
@@ -58,7 +58,7 @@ export type UserProfile = {
  */
 export type UpdateProfileData = {
   image?: File | null;
-  fullName?: string;
+  fullName?: string | undefined;
   phone?: string;
   address?: string;
   emergencyContactName?: string;

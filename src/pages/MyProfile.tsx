@@ -160,12 +160,12 @@ function MyProfile() {
    * Example:
    * Reshika Shrestha becomes RS.
    */
-  const getInitials = (fullName: string) => {
+  const getInitials = (fullName: any) => {
     return fullName
       .trim()
       .split(/\s+/)
       .slice(0, 2)
-      .map((name) => name.charAt(0).toUpperCase())
+      .map((name: any) => name.charAt(0).toUpperCase())
       .join("");
   };
 
