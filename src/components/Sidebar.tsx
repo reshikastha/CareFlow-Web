@@ -50,11 +50,7 @@ const menuItems = [
     path: "/clients",
     icon: UserRound,
   },
-  {
-    name: "Schedule",
-    path: "/schedule",
-    icon: Clock3,
-  },
+  
   {
     name: "Incidents",
     path: "/incidents",
