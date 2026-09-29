@@ -2,66 +2,214 @@ import {
   ChevronDown,
   CircleAlert,
   Clock3,
-  FileText,
-  MoreHorizontal,
 } from "lucide-react";
 
-import { Link, useParams } from "react-router-dom";
+import {
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+
+import {
+  Link,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+
 import AppLayout from "../components/AppLayout";
+
+import {
+  getIncident,
+  getIncidentActivities,
+  updateIncidentStatus,
+  type Incident,
+  type IncidentActivity,
+  type IncidentStatus,
+} from "../services/incidentApi";
+
 import "../styles/incidentReview.css";
 
-const timelineItems = [
-  {
-    time: "24 Jun 2025, 14:30",
-    title: "Status changed to Under review",
-    person: "Reshika (Admin)",
-    color: "green",
-  },
-  {
-    time: "24 Jun 2025, 12:15",
-    title: "Follow-up task created",
-    person: "Ben Lee",
-    color: "dark",
-  },
-  {
-    time: "24 Jun 2025, 11:00",
-    title: "Information requested from worker",
-    person: "Reshika (Admin)",
-    color: "blue",
-  },
-  {
-    time: "24 Jun 2025, 10:45",
-    title: "Incident reported",
-    person: "Aisha Khan",
-    description:
-      "Client slipped while transferring from bed to chair. No visible injury, but reported mild discomfort.",
-    color: "dark",
-  },
-];
+const statusLabels: Record<IncidentStatus, string> = {
+  OPEN: "Open",
+  UNDER_REVIEW: "Under review",
+  ACTION_REQUIRED: "Action required",
+  CLOSED: "Closed",
+};
 
-const followUpActions = [
-  {
-    task: "Review care plan and mobility support",
-    assigned: "Ben Lee",
-    dueDate: "26 Jun 2025",
-    status: "Open",
-  },
-  {
-    task: "Complete falls risk assessment",
-    assigned: "Priya Sharma",
-    dueDate: "27 Jun 2025",
-    status: "In progress",
-  },
-  {
-    task: "Follow up with client and family",
-    assigned: "Aisha Khan",
-    dueDate: "29 Jun 2025",
-    status: "Not started",
-  },
-];
+const severityLabels = {
+  LOW: "Low",
+  MEDIUM: "Medium",
+  HIGH: "High",
+  CRITICAL: "Critical",
+};
+
+function formatDate(dateValue: string): string {
+  return new Intl.DateTimeFormat("en-AU", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "Australia/Adelaide",
+  }).format(new Date(dateValue));
+}
+
+// Supports route values such as "24" and "INC-024".
+function getNumericIncidentId(value: string | undefined): number | null {
+  if (!value) {
+    return null;
+  }
+
+  const cleanedValue = value.replace(/^INC-/i, "");
+  const numericId = Number(cleanedValue);
+
+  return Number.isInteger(numericId) && numericId > 0
+    ? numericId
+    : null;
+}
 
 function IncidentReview() {
   const { incidentId } = useParams();
+  const navigate = useNavigate();
+
+  const numericIncidentId = getNumericIncidentId(incidentId);
+
+  const [incident, setIncident] = useState<Incident | null>(null);
+  const [activities, setActivities] = useState<
+    IncidentActivity[]
+  >([]);
+
+  const [loading, setLoading] = useState(true);
+  const [updatingStatus, setUpdatingStatus] = useState(false);
+  const [showStatusMenu, setShowStatusMenu] = useState(false);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+
+  // Load the incident and its activity history.
+  const loadIncident = useCallback(async () => {
+    if (!numericIncidentId) {
+      setError("Invalid incident ID.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError("");
+
+      // Fetch both requests together.
+      const [incidentData, activityData] = await Promise.all([
+        getIncident(numericIncidentId),
+        getIncidentActivities(numericIncidentId),
+      ]);
+
+      setIncident(incidentData);
+      setActivities(activityData);
+    } catch (requestError) {
+      setError(
+        requestError instanceof Error
+          ? requestError.message
+          : "Unable to load incident.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  }, [numericIncidentId]);
+
+  useEffect(() => {
+    void loadIncident();
+  }, [loadIncident]);
+
+  // Change the incident status.
+  async function handleStatusChange(status: IncidentStatus) {
+    if (!incident) {
+      return;
+    }
+
+    try {
+      setUpdatingStatus(true);
+      setError("");
+      setMessage("");
+      setShowStatusMenu(false);
+
+      let resolutionNotes: string | undefined;
+
+      // Ask for closing notes when the admin closes an incident.
+      if (status === "CLOSED") {
+        const notes = window.prompt(
+          "Enter resolution notes before closing this incident:",
+          incident.resolutionNotes ?? "",
+        );
+
+        // The user pressed Cancel.
+        if (notes === null) {
+          return;
+        }
+
+        if (!notes.trim()) {
+          setError(
+            "Resolution notes are required when closing an incident.",
+          );
+          return;
+        }
+
+        resolutionNotes = notes.trim();
+      }
+
+      const updatedIncident = await updateIncidentStatus(
+        incident.id,
+        status,
+        resolutionNotes,
+      );
+
+      setIncident(updatedIncident);
+      setMessage(
+        `Incident status changed to ${statusLabels[status]}.`,
+      );
+
+      // Reload activity so the new status activity appears.
+      const updatedActivities = await getIncidentActivities(
+        incident.id,
+      );
+
+      setActivities(updatedActivities);
+    } catch (requestError) {
+      setError(
+        requestError instanceof Error
+          ? requestError.message
+          : "Unable to update incident status.",
+      );
+    } finally {
+      setUpdatingStatus(false);
+    }
+  }
+
+  function handleRequestInformation() {
+    void handleStatusChange("ACTION_REQUIRED");
+  }
+
+  if (loading) {
+    return (
+      <AppLayout>
+        <main className="page-content incident-review-page">
+          <p>Loading incident...</p>
+        </main>
+      </AppLayout>
+    );
+  }
+
+  if (!incident) {
+    return (
+      <AppLayout>
+        <main className="page-content incident-review-page">
+          <div className="review-breadcrumb">
+            <Link to="/incidents">Incidents</Link>
+          </div>
+
+          <p className="error-message">
+            {error || "Incident was not found."}
+          </p>
+        </main>
+      </AppLayout>
+    );
+  }
 
   return (
     <AppLayout>
@@ -69,12 +217,16 @@ function IncidentReview() {
         <div className="review-breadcrumb">
           <Link to="/incidents">Incidents</Link>
           <span>/</span>
-          <span>{incidentId ?? "INC-024"}</span>
+          <span>{incident.incidentNumber}</span>
         </div>
+
+        {error && <p className="error-message">{error}</p>}
+        {message && <p className="success-message">{message}</p>}
 
         <section className="review-heading">
           <div>
             <h1>Incident review</h1>
+
             <p>
               Review details, track actions and ensure the incident
               is resolved.
@@ -82,22 +234,69 @@ function IncidentReview() {
           </div>
 
           <div className="review-actions">
-            <label className="review-status-select">
+            <div className="review-status-select">
               <span>Status</span>
 
-              <button type="button">
+              <button
+                type="button"
+                disabled={updatingStatus}
+                onClick={() =>
+                  setShowStatusMenu((current) => !current)
+                }
+              >
                 <Clock3 size={16} />
-                Under review
+                {updatingStatus
+                  ? "Updating..."
+                  : statusLabels[incident.status]}
                 <ChevronDown size={16} />
               </button>
-            </label>
 
-            <button className="request-button" type="button">
+              {showStatusMenu && (
+                <div className="review-status-menu">
+                  {(
+                    Object.keys(
+                      statusLabels,
+                    ) as IncidentStatus[]
+                  ).map((status) => (
+                    <button
+                      key={status}
+                      type="button"
+                      className={
+                        incident.status === status
+                          ? "active"
+                          : ""
+                      }
+                      onClick={() =>
+                        void handleStatusChange(status)
+                      }
+                    >
+                      {statusLabels[status]}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <button
+              className="request-button"
+              type="button"
+              disabled={updatingStatus}
+              onClick={handleRequestInformation}
+            >
               Request information
             </button>
 
-            <button className="green-button" type="button">
-              Close incident
+            <button
+              className="green-button"
+              type="button"
+              disabled={
+                updatingStatus || incident.status === "CLOSED"
+              }
+              onClick={() => void handleStatusChange("CLOSED")}
+            >
+              {incident.status === "CLOSED"
+                ? "Incident closed"
+                : "Close incident"}
             </button>
           </div>
         </section>
@@ -107,123 +306,117 @@ function IncidentReview() {
             <article className="review-card incident-details-card">
               <header>
                 <h2>Incident details</h2>
-                <button type="button">Edit</button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    navigate(
+                      `/incidents/${incident.id}/edit`,
+                    )
+                  }
+                >
+                  Edit
+                </button>
               </header>
 
               <div className="incident-detail-grid">
                 <div>
                   <span>Incident ID</span>
-                  <strong>{incidentId ?? "INC-024"}</strong>
+                  <strong>{incident.incidentNumber}</strong>
                 </div>
 
                 <div>
                   <span>Date and time</span>
-                  <strong>Tue, 24 Jun 2025, 10:20</strong>
+                  <strong>
+                    {formatDate(incident.occurredAt)}
+                  </strong>
                 </div>
 
                 <div>
                   <span>Type</span>
-                  <strong>Fall risk</strong>
+                  <strong>{incident.incidentType}</strong>
                 </div>
 
                 <div>
                   <span>Client</span>
-                  <Link to="/clients">Aisha Foster</Link>
+                  <Link to={`/clients/${incident.clientId}`}>
+                    {incident.clientName}
+                  </Link>
                 </div>
 
                 <div>
                   <span>Worker</span>
-                  <strong>Aisha Khan</strong>
+                  <strong>
+                    {incident.workerName ?? "Not assigned"}
+                  </strong>
                 </div>
 
                 <div>
                   <span>Location</span>
-                  <strong>Maple House</strong>
+                  <strong>
+                    {incident.location ?? "Not provided"}
+                  </strong>
                 </div>
 
                 <div>
                   <span>Severity</span>
-                  <strong className="review-severity">
+
+                  <strong
+                    className={`review-severity review-severity--${incident.severity.toLowerCase()}`}
+                  >
                     <CircleAlert size={13} />
-                    High
+                    {severityLabels[incident.severity]}
                   </strong>
                 </div>
 
                 <div>
                   <span>Status</span>
-                  <strong className="review-under-status">
+
+                  <strong
+                    className={`review-status review-status--${incident.status
+                      .toLowerCase()
+                      .replaceAll("_", "-")}`}
+                  >
                     <Clock3 size={13} />
-                    Under review
+                    {statusLabels[incident.status]}
                   </strong>
                 </div>
 
                 <div>
                   <span>Reported by</span>
-                  <strong>Aisha Khan</strong>
+                  <strong>{incident.reportedByName}</strong>
                 </div>
               </div>
 
               <div className="review-description">
                 <section>
                   <h3>Description</h3>
-                  <p>
-                    Client slipped while transferring from bed to
-                    chair. No visible injury, but reported mild
-                    discomfort. Client remained alert and was
-                    supported back to a safe position.
-                  </p>
+                  <p>{incident.description}</p>
                 </section>
 
                 <section>
                   <h3>Immediate action taken</h3>
                   <p>
-                    Assisted client to a safe position, assessed for
-                    injury, provided reassurance and notified the
-                    on-site nurse. Increased supervision for the
-                    remainder of the shift.
+                    {incident.immediateAction ||
+                      "No immediate action was recorded."}
                   </p>
                 </section>
 
                 <section>
                   <h3>People notified</h3>
                   <p>
-                    On-site nurse, Team leader (Linden House),
-                    Client’s family (as per care plan).
+                    {incident.peopleNotified ||
+                      "No people were recorded as notified."}
                   </p>
                 </section>
+
+                {incident.resolutionNotes && (
+                  <section>
+                    <h3>Resolution notes</h3>
+                    <p>{incident.resolutionNotes}</p>
+                  </section>
+                )}
               </div>
-
-              <section className="attachments-section">
-                <h3>Attachments</h3>
-
-                <div className="attachments-grid">
-                  <article className="attachment-card">
-                    <FileText size={21} />
-
-                    <div>
-                      <strong>incident-report-INC-024.pdf</strong>
-                      <span>245 KB</span>
-                    </div>
-
-                    <button type="button">
-                      <MoreHorizontal size={17} />
-                    </button>
-                  </article>
-
-                  <article className="attachment-card">
-                    <FileText size={21} />
-
-                    <div>
-                      <strong>location-photo.pdf</strong>
-                      <span>120 KB</span>
-                    </div>
-
-                    <button type="button">
-                      <MoreHorizontal size={17} />
-                    </button>
-                  </article>
-                </div>
-              </section>
             </article>
           </div>
 
@@ -231,79 +424,49 @@ function IncidentReview() {
             <h2>Activity timeline</h2>
 
             <div className="timeline">
-              {timelineItems.map((item) => (
-                <article
-                  className="timeline-item"
-                  key={`${item.time}-${item.title}`}
-                >
-                  <span
-                    className={`timeline-dot timeline-dot--${item.color}`}
-                  />
+              {activities.length === 0 ? (
+                <p>No activity has been recorded yet.</p>
+              ) : (
+                activities.map((activity, index) => (
+                  <article
+                    className="timeline-item"
+                    key={activity.id}
+                  >
+                    <span
+                      className={`timeline-dot ${
+                        index === 0
+                          ? "timeline-dot--green"
+                          : "timeline-dot--dark"
+                      }`}
+                    />
 
-                  <div>
-                    <time>{item.time}</time>
-                    <h3>{item.title}</h3>
-                    <p>{item.person}</p>
+                    <div>
+                      <time>
+                        {formatDate(activity.createdAt)}
+                      </time>
 
-                    {item.description && (
-                      <p>{item.description}</p>
-                    )}
-                  </div>
-                </article>
-              ))}
+                      <h3>{activity.action}</h3>
+                      <p>{activity.performedByName}</p>
+
+                      {activity.details && (
+                        <p>{activity.details}</p>
+                      )}
+                    </div>
+                  </article>
+                ))
+              )}
             </div>
-
-            <button className="activity-button" type="button">
-              View all activity
-            </button>
           </aside>
         </section>
 
         <section className="review-card follow-up-card">
           <h2>Follow-up actions</h2>
 
-          <div className="table-wrapper">
-            <table>
-              <thead>
-                <tr>
-                  <th>Task</th>
-                  <th>Assigned to</th>
-                  <th>Due date</th>
-                  <th>Status</th>
-                  <th />
-                </tr>
-              </thead>
-
-              <tbody>
-                {followUpActions.map((action) => (
-                  <tr key={action.task}>
-                    <td>{action.task}</td>
-                    <td>{action.assigned}</td>
-                    <td>{action.dueDate}</td>
-
-                    <td>
-                      <span
-                        className={`action-status action-status--${action.status
-                          .toLowerCase()
-                          .replace(" ", "-")}`}
-                      >
-                        {action.status}
-                      </span>
-                    </td>
-
-                    <td>
-                      <button
-                        className="follow-up-menu"
-                        type="button"
-                      >
-                        <MoreHorizontal size={17} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <p>
+            Follow-up action endpoints have not been added yet.
+            This section can be connected after creating a
+            follow-up actions table and API.
+          </p>
         </section>
       </main>
     </AppLayout>
