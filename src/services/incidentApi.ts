@@ -78,6 +78,18 @@ interface ApiActivity {
   created_at: string;
 }
 
+export interface IncidentFormData {
+  clientId: number;
+  workerId: number | null;
+  incidentType: string;
+  occurredAt: string;
+  location: string;
+  severity: IncidentSeverity;
+  description: string;
+  immediateAction: string;
+  peopleNotified: string;
+}
+
 // Read the JWT created when the user logged in.
 function getToken(): string {
   const token = localStorage.getItem("careflow_token");
@@ -286,4 +298,73 @@ export async function deleteIncident(
   });
 
   await handleResponse(response);
+}
+
+// POST /api/incidents
+export async function createIncident(
+  formData: IncidentFormData,
+): Promise<Incident> {
+  const token = localStorage.getItem("careflow_token");
+
+  if (!token) {
+    throw new Error("You are not logged in.");
+  }
+
+  const response = await fetch(
+    "http://localhost:5000/api/incidents",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+
+      body: JSON.stringify(formData),
+    },
+  );
+
+  const data = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw new Error(
+      data?.message ?? "Unable to create incident.",
+    );
+  }
+
+  return normalizeIncident(data.incident ?? data);
+}
+
+// PATCH /api/incidents/:incidentId
+export async function updateIncident(
+  incidentId: number,
+  formData: IncidentFormData,
+): Promise<Incident> {
+  const token = localStorage.getItem("careflow_token");
+
+  if (!token) {
+    throw new Error("You are not logged in.");
+  }
+
+  const response = await fetch(
+    `http://localhost:5000/api/incidents/${incidentId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+
+      body: JSON.stringify(formData),
+    },
+  );
+
+  const data = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw new Error(
+      data?.message ?? "Unable to update incident.",
+    );
+  }
+
+  return normalizeIncident(data.incident ?? data);
 }

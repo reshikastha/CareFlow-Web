@@ -24,6 +24,7 @@ import CarerIncidents from "./pages/CarerIncidents";
 import ReportIncident from "./pages/ReportIncident";
 import MyProfile from "./pages/MyProfile";
 import EditProfile from "./pages/EditProfile";
+import IncidentForm from "./pages/IncidentForm";
 // import "./styles/auth.css";
 
 function App() {
@@ -54,6 +55,8 @@ function App() {
       <Route path="/carer/leave" element={<LeaveRequests />}/>
       <Route path="/carer/incidents" element={<CarerIncidents />}/>
       <Route path="/carer/incidents/report" element={<ReportIncident />}/>
+      <Route path="/incidents/new" element={<IncidentForm />}/>
+      <Route path="/incidents/:incidentId/edit" element={<IncidentForm />}/>
       <Route  path="/carer/profile"  element={<MyProfile />}/>
       <Route  path="/carer/profile/edit"  element={<EditProfile  />}/>
       </Routes>
