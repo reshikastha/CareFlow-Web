@@ -56,11 +56,11 @@ const menuItems = [
     path: "/incidents",
     icon: TriangleAlert,
   },
-  {
-    name: "Reports",
-    path: "/reports",
-    icon: BarChart3,
-  },
+  // {
+  //   name: "Reports",
+  //   path: "/reports",
+  //   icon: BarChart3,
+  // },
   
 ];
 
@@ -76,8 +76,8 @@ const userMenu = [
     icon: CalendarDays,
   },
   {
-    name: "My clients",
-    path: "/carer/clients",
+    name: "Clients",
+    path: "/clients",
     icon: UsersRound,
   },
   {
@@ -92,7 +92,7 @@ const userMenu = [
   },
   {
     name: "Incidents",
-    path: "/carer/incidents",
+    path: "/incidents",
     icon: TriangleAlert,
   },
   
@@ -137,7 +137,7 @@ useEffect(() => {
    * CARE_WORKER receives carerMenu.
    */
   const selectedMenu =
-    profile?.role === "ADMIN" ? menuItems : menuItems;
+    profile?.role === "ADMIN" ? menuItems : userMenu;
 
 console.log( profile?.role)
      const handleLogout = () => {
