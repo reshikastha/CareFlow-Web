@@ -361,3 +361,7 @@
     grid-template-columns: 1fr;
   }
 }
+
+.dashboard-empty-state{
+  padding: 15px;
+}

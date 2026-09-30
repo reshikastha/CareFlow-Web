@@ -16,6 +16,8 @@ import {
 import AppLayout from "../components/AppLayout";
 import "../styles/leaveRequests.css";
 
+import { useNavigate } from "react-router-dom";
+
 const API_URL =
   import.meta.env.VITE_API_URL ?? "http://localhost:5000/api";
 
@@ -137,6 +139,8 @@ function LeaveRequests() {
   const [showAll, setShowAll] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate()
 
   const loadLeave = useCallback(async () => {
     try {
